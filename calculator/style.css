@@ -1,0 +1,86 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #2c3e50;
+    font-family: Arial, sans-serif;
+}
+
+.calculator {
+    background-color: #34495e;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    width: 320px;
+}
+
+.display {
+    background-color: #ecf0f1;
+    color: #2c3e50;
+    font-size: 2.5rem;
+    text-align: right;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    word-wrap: break-word;
+    min-height: 70px;
+}
+
+/* CSS Grid for button layout */
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.btn {
+    background-color: #7f8c8d;
+    color: white;
+    border: none;
+    padding: 20px;
+    font-size: 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn:hover {
+    background-color: #95a5a6;
+}
+
+.operator {
+    background-color: #e67e22;
+}
+
+.operator:hover {
+    background-color: #d35400;
+}
+
+.clear {
+    background-color: #e74c3c;
+    grid-column: span 2; /* Spans across 2 columns */
+}
+
+.clear:hover {
+    background-color: #c0392b;
+}
+
+.equal {
+    background-color: #2ecc71;
+    grid-row: span 2; /* Spans down 2 rows */
+}
+
+.equal:hover {
+    background-color: #27ae60;
+}
+
+.zero {
+    grid-column: span 2;
+}
