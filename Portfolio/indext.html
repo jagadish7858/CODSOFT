@@ -1,1 +1,573 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jagadish Ponlingam — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --silver:#c8c8c8;--silver-bright:#f0f0f0;--silver-dim:#777;
+  --bg:#060606;--text:#ddd;--text-muted:#777;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-weight:300;overflow-x:hidden;font-size:18px;}
+#gemini-bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+.gemini-orb{position:absolute;border-radius:50%;filter:blur(0px);}
+.orb1{width:340px;height:340px;top:8%;left:4%;
+  background:conic-gradient(from 0deg,transparent 60%,rgba(138,180,248,0.18) 72%,rgba(248,210,255,0.22) 82%,rgba(138,180,248,0.1) 90%,transparent 100%);
+  animation:orbSpin1 8s linear infinite, orbFloat1 14s ease-in-out infinite alternate;}
+.orb2{width:280px;height:280px;top:55%;right:6%;
+  background:conic-gradient(from 120deg,transparent 55%,rgba(248,210,255,0.2) 68%,rgba(138,180,248,0.18) 80%,rgba(200,248,200,0.12) 90%,transparent 100%);
+  animation:orbSpin2 10s linear infinite reverse, orbFloat2 16s ease-in-out infinite alternate;}
+.orb3{width:200px;height:200px;bottom:20%;left:12%;
+  background:conic-gradient(from 240deg,transparent 60%,rgba(200,248,200,0.15) 73%,rgba(248,210,255,0.2) 85%,transparent 100%);
+  animation:orbSpin1 12s linear infinite, orbFloat3 11s ease-in-out infinite alternate;}
+.orb4{width:160px;height:160px;top:35%;left:50%;
+  background:conic-gradient(from 60deg,transparent 65%,rgba(138,180,248,0.12) 78%,rgba(248,230,138,0.1) 88%,transparent 100%);
+  animation:orbSpin2 7s linear infinite, orbFloat1 18s ease-in-out infinite alternate;}
+.orb5{width:120px;height:120px;top:70%;left:35%;
+  background:conic-gradient(from 300deg,transparent 60%,rgba(248,138,138,0.12) 75%,rgba(138,180,248,0.14) 88%,transparent 100%);
+  animation:orbSpin1 9s linear infinite reverse, orbFloat2 13s ease-in-out infinite alternate;}
+.orb1::after,.orb2::after,.orb3::after,.orb4::after,.orb5::after{
+  content:'';position:absolute;border-radius:50%;
+  top:50%;left:50%;transform:translate(-50%,-50%);}
+.orb1::after{width:60px;height:60px;background:radial-gradient(circle,rgba(138,180,248,0.25) 0%,transparent 70%);}
+.orb2::after{width:50px;height:50px;background:radial-gradient(circle,rgba(248,210,255,0.2) 0%,transparent 70%);}
+.orb3::after{width:40px;height:40px;background:radial-gradient(circle,rgba(200,248,200,0.2) 0%,transparent 70%);}
+.orb4::after{width:30px;height:30px;background:radial-gradient(circle,rgba(138,180,248,0.18) 0%,transparent 70%);}
+.orb5::after{width:25px;height:25px;background:radial-gradient(circle,rgba(248,138,138,0.15) 0%,transparent 70%);}
+@keyframes orbSpin1{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+@keyframes orbSpin2{from{transform:rotate(0deg);}to{transform:rotate(-360deg);}}
+@keyframes orbFloat1{0%{top:8%;left:4%;}50%{top:12%;left:6%;}100%{top:6%;left:2%;}}
+@keyframes orbFloat2{0%{top:55%;right:6%;}50%{top:50%;right:9%;}100%{top:58%;right:4%;}}
+@keyframes orbFloat3{0%{bottom:20%;left:12%;}50%{bottom:24%;left:9%;}100%{bottom:18%;left:14%;}}
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:20px 64px;
+  background:rgba(6,6,6,0.88);backdrop-filter:blur(22px);
+  border-bottom:1px solid rgba(200,200,200,0.1);
+}
+.nav-brand{font-family:'Playfair Display',serif;font-size:1.55rem;color:var(--silver-bright);text-decoration:none;letter-spacing:1px;}
+.nav-links{display:flex;gap:10px;}
+.nav-links a{
+  color:var(--text-muted);text-decoration:none;font-size:0.95rem;letter-spacing:0.5px;
+  padding:8px 20px;border:1px solid transparent;border-radius:22px;transition:all 0.3s ease;
+}
+.nav-links a:hover{color:var(--silver-bright);border-color:rgba(200,200,200,0.25);background:rgba(200,200,200,0.07);}
+.hero-zone{
+  position:relative;z-index:1;width:100%;height:320px;
+  margin-top:80px;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+#hero-canvas{position:absolute;inset:0;width:100%;height:100%;}
+main{position:relative;z-index:1;padding-bottom:60px;}
+.section{
+  width:88%;max-width:880px;
+  margin:0 auto 48px auto;
+  padding:54px 60px;
+  border-radius:18px;
+  position:relative;
+  background:rgba(255,255,255,0.022);
+  backdrop-filter:blur(10px);
+}
+.section::before{
+  content:'';
+  position:absolute;
+  inset:-2px;
+  border-radius:20px;
+  background:conic-gradient(
+    from var(--angle,0deg),
+    transparent 0%,
+    transparent 30%,
+    rgba(255,255,255,0.08) 38%,
+    rgba(220,220,220,0.55) 45%,
+    rgba(255,255,255,0.95) 50%,
+    rgba(220,220,220,0.55) 55%,
+    rgba(255,255,255,0.08) 62%,
+    transparent 70%,
+    transparent 100%
+  );
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+  padding:2px;
+  animation:spinBorder 4s linear infinite;
+  pointer-events:none;
+}
+.section:nth-child(2)::before{animation-duration:4.5s;}
+.section:nth-child(3)::before{animation-duration:5s;animation-direction:reverse;}
+.section:nth-child(4)::before{animation-duration:3.8s;}
+.section:nth-child(5)::before{animation-duration:4.2s;animation-direction:reverse;}
+@property --angle{syntax:'<angle>';initial-value:0deg;inherits:false;}
+@keyframes spinBorder{to{--angle:360deg;}}
+.section::after{
+  content:'';position:absolute;inset:0;border-radius:18px;
+  border:1px solid rgba(200,200,200,0.07);pointer-events:none;
+}
+.section-title{
+  font-family:'Playfair Display',serif;
+  font-size:2.4rem;font-weight:700;
+  color:var(--silver-bright);letter-spacing:2px;
+  margin-bottom:34px;text-align:left;
+  display:inline-block;position:relative;
+}
+.section-title::after{
+  content:'';display:block;width:48px;height:2px;margin-top:10px;
+  background:linear-gradient(90deg,rgba(200,200,200,0.8),transparent);
+}
+.about-layout{display:flex;align-items:flex-start;gap:38px;}
+.photo-placeholder{
+  width:158px;height:158px;min-width:158px;border-radius:50%;
+  background:rgba(255,255,255,0.03);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;
+  color:var(--text-muted);font-size:0.82rem;letter-spacing:0.5px;
+  position:relative;overflow:hidden;
+}
+.photo-placeholder::before{
+  content:'';position:absolute;inset:-2px;border-radius:50%;
+  background:conic-gradient(from var(--angle,0deg),transparent 0%,transparent 35%,rgba(255,255,255,0.6) 50%,transparent 65%,transparent 100%);
+  padding:2px;
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;
+  animation:spinBorder 3s linear infinite;
+}
+.photo-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+.about-text p{font-size:1.15rem;line-height:1.9;color:#ccc;}
+.projects-list{display:flex;flex-direction:column;gap:22px;}
+.project-card{
+  border:1px solid rgba(200,200,200,0.09);border-radius:12px;
+  padding:26px 28px;background:rgba(255,255,255,0.018);
+  transition:background 0.3s,border-color 0.3s;
+}
+.project-card:hover{background:rgba(200,200,200,0.05);border-color:rgba(200,200,200,0.28);}
+.project-card strong{font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--silver-bright);display:block;margin-bottom:8px;}
+.project-card span{font-size:1.05rem;color:#aaa;line-height:1.7;}
+.skills-group{margin-bottom:26px;}
+.skills-group:last-child{margin-bottom:0;}
+.skills-label{font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:var(--text-muted);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:12px;}
+.skill-tags{display:flex;flex-wrap:wrap;gap:10px;}
+.skill-tag{
+  padding:8px 20px;border:1px solid rgba(200,200,200,0.16);border-radius:22px;
+  font-size:0.95rem;color:#ccc;background:rgba(255,255,255,0.025);
+  font-family:'JetBrains Mono',monospace;transition:all 0.25s ease;
+}
+.skill-tag:hover{border-color:rgba(200,200,200,0.48);color:var(--silver-bright);background:rgba(200,200,200,0.07);}
+.contact-list{display:flex;flex-direction:column;gap:20px;}
+.contact-row{display:flex;align-items:center;gap:18px;font-size:1.1rem;color:#bbb;}
+.contact-label{font-family:'JetBrains Mono',monospace;font-size:0.8rem;letter-spacing:2px;color:var(--text-muted);text-transform:uppercase;min-width:86px;}
+.contact-row a{color:var(--silver-bright);text-decoration:none;border-bottom:1px solid rgba(200,200,200,0.2);transition:border-color 0.2s;}
+.contact-row a:hover{border-color:var(--silver-bright);}
+footer{position:relative;z-index:1;text-align:center;padding:32px;font-size:0.88rem;color:#3a3a3a;border-top:1px solid rgba(200,200,200,0.05);letter-spacing:0.5px;}
+@media(max-width:700px){
+  nav{padding:16px 20px;}
+  .nav-links a{padding:7px 13px;font-size:0.85rem;}
+  .section{padding:36px 24px;width:95%;}
+  .about-layout{flex-direction:column;align-items:flex-start;}
+  .photo-placeholder{align-self:center;}
+  body{font-size:16px;}
+}
+</style>
+</head>
+<body>
+<div id="gemini-bg">
+  <div class="gemini-orb orb1"></div>
+  <div class="gemini-orb orb2"></div>
+  <div class="gemini-orb orb3"></div>
+  <div class="gemini-orb orb4"></div>
+  <div class="gemini-orb orb5"></div>
+</div>
+<nav>
+  <a href="#" class="nav-brand">Jagadish Ponlingam</a>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+<div class="hero-zone" aria-hidden="true">
+  <canvas id="hero-canvas"></canvas>
+</div>
+<main>
+  <section class="section" id="about">
+    <h2 class="section-title">About Me</h2>
+    <div class="about-layout">
+      <div class="photo-placeholder" title="Jagadish Ponlingam">
+        <img src="profile_pic.jpeg" alt="Jagadish Ponlingam">
+      </div>
+      <div class="about-text">
+        <p>I am an Artificial Intelligence and Data Science student passionate about building efficient algorithms and exploring complex datasets. I'm also deeply interested in game development and love building PCs from scratch.</p>
+      </div>
+    </div>
+  </section>
+  <section class="section" id="projects">
+    <h2 class="section-title">Projects</h2>
+    <div class="projects-list">
+      <div class="project-card">
+        <strong>Currency Converter</strong>
+        <span>A GUI-based tool built to convert currencies in real time, with a clean interface powered by Tkinter.</span>
+      </div>
+      <div class="project-card">
+        <strong>Lumen Nova</strong>
+        <span>A web platform designed to help people learn coding, with structured lessons and interactive exercises.</span>
+      </div>
+    </div>
+  </section>
+  <section class="section" id="skills">
+    <h2 class="section-title">Skills</h2>
+    <div class="skills-group">
+      <div class="skills-label">Languages</div>
+      <div class="skill-tags">
+        <span class="skill-tag">C</span>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">Java</span>
+      </div>
+    </div>
+    <div class="skills-group" style="margin-top:26px;">
+      <div class="skills-label">Tools &amp; Tech</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Tkinter</span>
+        <span class="skill-tag">Pandas</span>
+        <span class="skill-tag">NumPy</span>
+        <span class="skill-tag">Matplotlib</span>
+        <span class="skill-tag">Excel</span>
+        <span class="skill-tag">PowerPoint</span>
+        <span class="skill-tag">Word</span>
+      </div>
+    </div>
+    <div class="skills-group" style="margin-top:26px;">
+      <div class="skills-label">Soft Skills</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Cross-cultural communication</span>
+        <span class="skill-tag">Teamwork</span>
+      </div>
+    </div>
+  </section>
+  <section class="section" id="contact">
+    <h2 class="section-title">Contact</h2>
+    <div class="contact-list">
+      <div class="contact-row">
+        <span class="contact-label">Email</span>
+        <a href="mailto:jagadishponlingam7858@gmail.com">jagadishponlingam7858@gmail.com</a>
+      </div>
+      <div class="contact-row">
+        <span class="contact-label">LinkedIn</span>
+        <a href="https://www.linkedin.com/in/jagadish-ponlingam-269614380/" target="_blank">View Profile →</a>
+      </div>
+      <div class="contact-row">
+        <span class="contact-label">GitHub</span>
+        <a href="https://github.com/jagadish7858" target="_blank">jagadish7858 →</a>
+      </div>
+    </div>
+  </section>
+</main>
+<footer>&copy; 2026 Jagadish Ponlingam — All Rights Reserved</footer>
+<script>
+(function(){
+  const canvas = document.getElementById('hero-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, raf;
+  function resize(){
+    W = canvas.width  = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+  const C = {
+    silver:  'rgba(210,210,210,',
+    blue:    'rgba(138,180,248,',
+    pink:    'rgba(248,180,220,',
+    green:   'rgba(160,240,160,',
+    yellow:  'rgba(255,220,80,',
+    red:     'rgba(255,100,100,',
+  };
+  const τ = Math.PI*2;
+  function lerp(a,b,t){return a+(b-a)*t;}
+  let pacT = 0;           
+  let pacDir = 1;         
+  let mouthA = 0;         
+  let mouthDir = 1;
+  const laneY = H * 0.5;
+  const laneX0 = 40, laneX1 = W * 0.48;
+  const pacR = 22;
+  const dotCount = 14;
+  let dotEaten = new Array(dotCount).fill(false);
+  const ghosts = [
+    {color:C.red,   off:0.10, wobble:0,    dir:1},
+    {color:C.pink,  off:0.26, wobble:0.8,  dir:-1},
+    {color:C.blue,  off:0.38, wobble:1.6,  dir:1},
+  ];
+  let ghostT = 0;
+  let compFloat = 0; // time for bobbing
+  const codeLines = ['> compile main.c','  linking...','  OK 0 errors','> run output','  Hello, World!'];
+  let codeLineIdx = 0, codeCharIdx = 0, codeTimer = 0;
+  let visibleLines = [];
+  const sparks = Array.from({length:12}, (_,i)=>({
+    angle: (i/12)*τ,
+    dist:  90 + Math.random()*30,
+    size:  1 + Math.random()*2,
+    speed: 0.3 + Math.random()*0.4,
+    phase: Math.random()*τ,
+  }));
+  const doodles = [
+    {type:'controller', x:W*0.02, y:H*0.12, scale:0.8, phase:0},
+    {type:'chip',       x:W*0.85, y:H*0.08, scale:0.7, phase:1.2},
+    {type:'star',       x:W*0.92, y:H*0.55, scale:0.6, phase:2.4},
+    {type:'star',       x:W*0.1,  y:H*0.78, scale:0.5, phase:0.6},
+  ];
+  function drawDot(x,y,eaten,big){
+    if(eaten) return;
+    ctx.beginPath();
+    ctx.arc(x,y,big?5:3,0,τ);
+    ctx.fillStyle = C.yellow+'0.7)';
+    ctx.fill();
+    ctx.save();
+    ctx.shadowColor = 'rgba(255,220,80,0.9)';
+    ctx.shadowBlur = big?10:4;
+    ctx.fill();
+    ctx.restore();
+  }
+  function drawPacman(x,y,r,open,dir){
+    const base = dir===-1 ? Math.PI : 0;
+    const a0 = base + open, a1 = base + τ - open;
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(x,y);
+    ctx.arc(x,y,r, a0, a1);
+    ctx.closePath();
+    ctx.fillStyle = C.yellow+'0.92)';
+    ctx.shadowColor='rgba(255,220,60,0.6)';
+    ctx.shadowBlur=14;
+    ctx.fill();
+    const eyeOffX = dir === 1 ? -3 : 3;
+    ctx.beginPath();
+    ctx.arc(x+eyeOffX, y-r*0.38, r*0.1, 0, τ);
+    ctx.fillStyle='#000';
+    ctx.shadowBlur=0;
+    ctx.fill();
+    ctx.restore();
+  }
+  function drawGhost(x,y,col){
+    const r=18;
+    ctx.save();
+    ctx.shadowColor=col+'0.8)';ctx.shadowBlur=12;
+    ctx.fillStyle=col+'0.82)';
+    ctx.beginPath();
+    ctx.arc(x,y-r*0.3,r,Math.PI,0);
+    ctx.lineTo(x+r, y+r*1.0);
+    for(let i=3;i>=0;i--){
+      const fx = x + r - (3-i)*(r*2/3);
+      const fy = y + r*1.0 + (i%2===0 ? r*0.35 : 0);
+      ctx.lineTo(fx,fy);
+    }
+    ctx.lineTo(x-r, y+r*1.0);
+    ctx.closePath();
+    ctx.fill();
+    ctx.fillStyle='rgba(255,255,255,0.9)';
+    ctx.beginPath();ctx.ellipse(x-6,y-r*0.28,5,6,0,0,τ);ctx.fill();
+    ctx.beginPath();ctx.ellipse(x+6,y-r*0.28,5,6,0,0,τ);ctx.fill();
+    ctx.fillStyle='rgba(40,80,220,0.9)';
+    ctx.beginPath();ctx.arc(x-5,y-r*0.2,2.5,0,τ);ctx.fill();
+    ctx.beginPath();ctx.arc(x+7,y-r*0.2,2.5,0,τ);ctx.fill();
+    ctx.restore();
+  }
+  function drawComputer(cx,cy,t){
+    const s=1.15;
+    ctx.save();
+    ctx.translate(cx,cy);
+    const bob = Math.sin(t*1.1)*7;
+    ctx.translate(0,bob);
+    const grad=ctx.createRadialGradient(0,0,10,0,0,120);
+    grad.addColorStop(0,'rgba(138,180,248,0.07)');
+    grad.addColorStop(1,'transparent');
+    ctx.fillStyle=grad;
+    ctx.beginPath();ctx.arc(0,0,120,0,τ);ctx.fill();
+    ctx.fillStyle='rgba(30,32,40,0.88)';
+    ctx.strokeStyle='rgba(200,200,200,0.28)';
+    ctx.lineWidth=1.5;
+    roundRect(ctx,-70*s,-52*s,140*s,90*s,6);
+    ctx.fill();ctx.stroke();
+    ctx.fillStyle='rgba(12,18,35,0.95)';
+    roundRect(ctx,-62*s,-44*s,124*s,76*s,4);
+    ctx.fill();
+    const sheen=ctx.createLinearGradient(-62*s,-44*s,-62*s,32*s);
+    sheen.addColorStop(0,'rgba(138,180,248,0.04)');
+    sheen.addColorStop(0.5,'rgba(138,180,248,0.01)');
+    sheen.addColorStop(1,'transparent');
+    ctx.fillStyle=sheen;
+    roundRect(ctx,-62*s,-44*s,124*s,76*s,4);
+    ctx.fill();
+    ctx.font=`${10*s}px 'JetBrains Mono',monospace`;
+    const lineColors=['rgba(138,180,248,0.8)','rgba(160,200,255,0.6)','rgba(180,220,180,0.7)','rgba(255,220,120,0.7)','rgba(160,240,160,0.8)'];
+    for(let i=0;i<visibleLines.length;i++){
+      ctx.fillStyle=lineColors[i%lineColors.length];
+      ctx.fillText(visibleLines[i], -56*s, (-30+i*14)*s);
+    }
+    if(Math.floor(t*2)%2===0 && visibleLines.length > 0){
+      const lastLine = visibleLines[visibleLines.length-1]||'';
+      const tw = ctx.measureText(lastLine).width;
+      ctx.fillStyle='rgba(200,220,255,0.8)';
+      ctx.fillRect(-56*s+tw, (-38+(visibleLines.length-1)*14)*s, 6, 10*s);
+    }
+    ctx.strokeStyle='rgba(200,200,200,0.22)';ctx.lineWidth=2;
+    ctx.beginPath();ctx.moveTo(0,38*s);ctx.lineTo(0,58*s);ctx.stroke();
+    ctx.fillStyle='rgba(30,32,40,0.8)';
+    roundRect(ctx,-30*s,55*s,60*s,8*s,3);
+    ctx.fill();ctx.strokeStyle='rgba(200,200,200,0.18)';ctx.stroke();
+    ctx.restore();
+  }
+  function roundRect(ctx,x,y,w,h,r){
+    ctx.beginPath();
+    ctx.moveTo(x+r,y);
+    ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+    ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+    ctx.lineTo(x+r,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+    ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);
+    ctx.closePath();
+  }
+  function drawController(x,y,sc,alpha){
+    ctx.save();ctx.translate(x,y);ctx.scale(sc,sc);
+    ctx.strokeStyle=`rgba(200,200,200,${alpha})`;ctx.lineWidth=1.5;ctx.fillStyle=`rgba(30,30,30,${alpha*0.4})`;
+    ctx.beginPath();
+    ctx.moveTo(-38,15);ctx.bezierCurveTo(-50,-5,-45,-20,-30,-20);
+    ctx.lineTo(30,-20);ctx.bezierCurveTo(45,-20,50,-5,38,15);
+    ctx.bezierCurveTo(28,30,12,28,0,28);ctx.bezierCurveTo(-12,28,-28,30,-38,15);
+    ctx.closePath();ctx.fill();ctx.stroke();
+    ctx.fillStyle=`rgba(150,150,150,${alpha*0.6})`;
+    ctx.fillRect(-30,-5,5,14);ctx.fillRect(-25,0,14,4);
+    const btns=[{x:18,y:-10,c:`rgba(255,100,100,${alpha*0.7})`},{x:28,y:-2,c:`rgba(100,180,100,${alpha*0.7})`},{x:18,y:6,c:`rgba(80,120,255,${alpha*0.7})`}];
+    btns.forEach(b=>{ctx.beginPath();ctx.arc(b.x,b.y,4,0,τ);ctx.fillStyle=b.c;ctx.fill();});
+    ctx.restore();
+  }
+  function drawChip(x,y,sc,alpha){
+    ctx.save();ctx.translate(x,y);ctx.scale(sc,sc);
+    ctx.strokeStyle=`rgba(200,200,200,${alpha})`;ctx.lineWidth=1.2;
+    ctx.fillStyle=`rgba(20,24,35,${alpha*0.5})`;
+    roundRect(ctx,-22,-22,44,44,3);ctx.fill();ctx.stroke();
+    ctx.fillStyle=`rgba(12,16,28,${alpha*0.6})`;
+    roundRect(ctx,-14,-14,28,28,2);ctx.fill();ctx.stroke();
+    const pins=[-10,0,10];
+    pins.forEach(p=>{
+      ctx.strokeStyle=`rgba(180,180,180,${alpha*0.5})`;ctx.lineWidth=1;
+      ctx.beginPath();ctx.moveTo(-22,p);ctx.lineTo(-30,p);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(22,p);ctx.lineTo(30,p);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(p,-22);ctx.lineTo(p,-30);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(p,22);ctx.lineTo(p,30);ctx.stroke();
+    });
+    ctx.restore();
+  }
+  function drawStar(x,y,sc,alpha,t){
+    ctx.save();ctx.translate(x,y);ctx.rotate(t*0.5);ctx.scale(sc,sc);
+    ctx.strokeStyle=`rgba(220,220,200,${alpha})`;ctx.lineWidth=1;
+    for(let i=0;i<4;i++){
+      ctx.save();ctx.rotate(i*Math.PI/4);
+      ctx.beginPath();ctx.moveTo(0,-18);ctx.lineTo(0,18);ctx.stroke();
+      ctx.restore();
+    }
+    ctx.beginPath();ctx.arc(0,0,5,0,τ);ctx.fillStyle=`rgba(255,240,180,${alpha*0.5})`;ctx.fill();
+    ctx.restore();
+  }
+  let last=0;
+  function tick(ts){
+    const dt=Math.min((ts-last)/1000,0.05);last=ts;
+    ctx.clearRect(0,0,W,H);
+    const ly = H*0.52;
+    const lx0=50, lx1=W*0.5-30;
+    pacT += dt * 0.28 * pacDir;
+    if(pacT>=1){pacT=1;pacDir=-1;dotEaten.fill(false);}
+    if(pacT<=0){pacT=0;pacDir=1;dotEaten.fill(false);}
+    mouthA += dt * 3.5 * mouthDir;
+    if(mouthA>0.42)mouthDir=-1;
+    if(mouthA<0.02)mouthDir=1;
+    const pacX = lerp(lx0+pacR,lx1,pacT);
+    for(let i=0;i<dotCount;i++){
+      const dx=lx0+pacR + (i+0.5)/(dotCount)*(lx1-lx0-pacR);
+      const big=i%4===0;
+      if(!dotEaten[i]&&Math.abs(dx-pacX)<14){dotEaten[i]=true;}
+    }
+    ghostT += dt * 0.18;
+    codeTimer+=dt;
+    if(codeTimer>0.07){
+      codeTimer=0;
+      const line=codeLines[codeLineIdx];
+      codeCharIdx++;
+      if(codeCharIdx>line.length){
+        if(visibleLines.length<5)visibleLines.push(line);
+        else{visibleLines.shift();visibleLines.push(line);}
+        codeLineIdx=(codeLineIdx+1)%codeLines.length;
+        codeCharIdx=0;
+        codeTimer=-0.6; // pause between lines
+      } else {
+        const partial=line.slice(0,codeCharIdx);
+        const vl=[...visibleLines];
+        if(vl.length===0||vl[vl.length-1]!==line){
+          if(vl.length>=5)vl.shift();
+          vl.push(partial);
+          visibleLines=vl;
+        } else {
+          visibleLines[visibleLines.length-1]=partial;
+        }
+      }
+    }
+    compFloat+=dt;
+    ctx.strokeStyle='rgba(200,200,200,0.07)';ctx.lineWidth=1;ctx.setLineDash([6,8]);
+    ctx.beginPath();ctx.moveTo(lx0,ly);ctx.lineTo(lx1,ly);ctx.stroke();
+    ctx.setLineDash([]);
+    for(let i=0;i<dotCount;i++){
+      const dx=lx0+pacR + (i+0.5)/dotCount*(lx1-lx0-pacR);
+      drawDot(dx,ly,dotEaten[i],i%5===0);
+    }
+    ghosts.forEach((g,idx)=>{
+      const gx=lerp(lx0+pacR,lx1, ((ghostT+g.off)%1));
+      const gy=ly + Math.sin(ghostT*2+g.wobble)*10;
+      drawGhost(gx,gy,g.color);
+    });
+    drawPacman(pacX,ly,pacR,mouthA,pacDir);
+    const compX=W*0.73, compY=H*0.50;
+    drawComputer(compX,compY,compFloat);
+    sparks.forEach(sp=>{
+      sp.angle+=sp.speed*dt;
+      const sx=compX+Math.cos(sp.angle)*sp.dist;
+      const sy=compY+Math.sin(sp.angle)*sp.dist+Math.sin(compFloat*1.1)*6;
+      const pulse=(Math.sin(compFloat*2+sp.phase)+1)*0.5;
+      ctx.beginPath();ctx.arc(sx,sy,sp.size*(0.6+pulse*0.7),0,τ);
+      ctx.fillStyle=`rgba(138,180,248,${0.18+pulse*0.22})`;
+      ctx.fill();
+    });
+    const dd=[
+      {type:'controller', x:W*0.04, y:H*0.14, sc:0.85, ph:0},
+      {type:'chip',       x:W*0.88, y:H*0.1,  sc:0.75, ph:1.2},
+      {type:'star',       x:W*0.93, y:H*0.62, sc:0.7,  ph:2.4},
+      {type:'star',       x:W*0.05, y:H*0.80, sc:0.55, ph:0.6},
+      {type:'star',       x:W*0.45, y:H*0.12, sc:0.45, ph:3.1},
+    ];
+    dd.forEach(d=>{
+      const bobY=Math.sin(compFloat*0.9+d.ph)*8;
+      const alpha=0.22+Math.sin(compFloat*0.7+d.ph)*0.06;
+      if(d.type==='controller') drawController(d.x,d.y+bobY,d.sc,alpha);
+      else if(d.type==='chip')  drawChip(d.x,d.y+bobY,d.sc,alpha);
+      else drawStar(d.x,d.y+bobY,d.sc,alpha,compFloat+d.ph);
+    });
+    ctx.font="12px 'JetBrains Mono',monospace";
+    ctx.fillStyle='rgba(150,150,150,0.22)';
+    ctx.textAlign='center';
+    ctx.fillText('— AI & Game Dev Portfolio —',W/2,H-14);
+    ctx.textAlign='left';
+    raf=requestAnimationFrame(tick);
+  }
+  raf=requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>
